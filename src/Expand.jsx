@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import PropTypes from 'prop-types'
 
 class Expand extends Component {
@@ -20,9 +18,9 @@ class Expand extends Component {
           <span className='expand__title'>{title}</span>
           <button className='expand__toggle-btn' onClick={this.handleClick}>
             {this.state.isOpen ? (
-              <FontAwesomeIcon icon={faChevronUp} />
+              <i className='fas fa-chevron-up'></i>
             ) : (
-              <FontAwesomeIcon icon={faChevronDown} />
+              <i className='fas fa-chevron-down'></i>
             )}
           </button>
         </div>
