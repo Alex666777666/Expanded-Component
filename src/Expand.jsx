@@ -1,28 +1,43 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import PropTypes from 'prop-types'
-import Button from './Button.jsx'
 
-const Expand = ({ isOpen, children, title, onClose, onOpen }) => {
-  return (
-    <div className='expand border'>
-      <div className='expand__header'>
-        <span className='expand__title'>{title}</span>
-        <Button isOpen={isOpen} onClose={onClose} onOpen={onOpen} />
-      </div>
-      {isOpen && (
-        <div className='expand__content'>
-          <p>{children}</p>
+class Expand extends Component {
+  state = {
+    isOpen: false,
+  }
+
+  handleClick = () => {
+    this.setState({ isOpen: !this.state.isOpen })
+  }
+
+  render() {
+    const { title, children } = this.props
+    return (
+      <div className='expand border'>
+        <div className='expand__header'>
+          <span className='expand__title'>{title}</span>
+          <button className='expand__toggle-btn' onClick={this.handleClick}>
+            {this.state.isOpen ? (
+              <FontAwesomeIcon icon={faChevronUp} />
+            ) : (
+              <FontAwesomeIcon icon={faChevronDown} />
+            )}
+          </button>
         </div>
-      )}
-    </div>
-  )
+        {this.state.isOpen ? (
+          <div className='expand__content'>{children}</div>
+        ) : null}
+      </div>
+    )
+  }
 }
 
 Expand.propTypes = {
   isOpen: PropTypes.bool,
   children: PropTypes.element,
   title: PropTypes.string,
-  onClose: PropTypes.func.isRequired,
 }
 
 Expand.defaultProps = {
